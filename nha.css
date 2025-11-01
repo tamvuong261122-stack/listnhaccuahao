@@ -1,0 +1,246 @@
+
+body {
+    background-image: url(reshiram.jpg); /* Đường dẫn tới ảnh nền */
+    background-repeat: no-repeat; /* Không lặp lại ảnh (chỉ hiển thị 1 lần duy nhất) */
+    background-position: center center; /* Căn ảnh vào giữa màn hình cả theo chiều ngang lẫn dọc */
+    background-attachment: fixed; /* Giữ ảnh nền cố định, không cuộn theo trang (hiệu ứng nền đứng yên) */
+    background-size: cover; /* Co giãn ảnh để phủ kín toàn bộ màn hình, không bị méo */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    gap: 1px;
+    font-family: 'Pacifico', cursive;
+}
+.h1{
+    background-color: aliceblue;
+    font-weight: bold;
+    color: red;
+} 
+.k{
+    font-weight: bold;
+    color: red;
+    text-shadow: 0 0 3px white, 0 0 10px;
+}
+.x2{
+    margin-top: -100px;
+    margin-bottom: -150px;
+}
+.s2{
+    border: 50px green;
+    height: 35px;
+    width: 200px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(201, 233, 222);
+    color: rgb(21, 17, 24);
+}
+.s2:hover{
+    transform: scale(1);
+}
+#s1{
+  color: yellow;
+  text-shadow: 0 0 2px white;
+  background: linear-gradient(to bottom, #00d5ff, #ff9ce6);
+}
+#s1:hover{
+  color: white;
+  box-shadow: 0 0 15px 5px #00ffff;
+}
+
+.p{
+    height: 28px;
+    width: 50px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffb6c1;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 1px;
+}
+.pl{
+    background: linear-gradient(135deg, #d89bbb, #d8eaff);
+    color: rgb(31, 220, 31);
+    text-shadow: 0 0 10px white;
+    margin: 10px;
+    height: 28px;
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 1px;
+}
+.pt{
+    background: linear-gradient(135deg, #d89bbb, #d8eaff);
+    color: #2600ff;
+    text-shadow: 0 0 10px white;
+    margin: 10px;
+    height: 28px;
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+.pk{
+    margin-bottom: 50px;
+    margin-top: -5px;
+}
+.timkiembox{
+    margin-top: 50px;
+}
+main{
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+}
+.chay{
+    color: red;
+    border-radius: 5px;
+    width: auto;
+    height: 50px;
+    margin-bottom: -10;
+    margin-bottom: 75px;
+    overflow: hidden;                                   /*Chữ ẩn khi ra khỏi khung*/
+    text-shadow: 0 0 3px white, 0 0 10px red;
+}
+#ten{
+    background-color: none;
+    border-radius: 10px;
+    width: 250px;
+    height: 20px;
+    display: flex;
+    overflow: hidden;                                   
+    margin-top: -45px !important;
+    margin-bottom: -23px;
+    color: black;
+  text-shadow: 0 0 2px white, 0 0 10px white;      /* tạo bóng text-shadow: [dịch ngang] [dịch dọc] [độ mờ] [màu];*/
+  font-weight: bold;
+}
+.chay{
+    margin-top: 1px;
+}
+#ten{
+    position: relative;
+    margin-top: -15px;
+}
+audio{
+    height: 30px;
+    width: 375px;
+    display: none;
+    margin-bottom: 5px;
+}
+input{
+    text-align: left !important;
+    padding-left: 25px !important;
+}
+#search{
+    width: 15%;
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid linear-gradient(135deg, #80eaff, #ff9ce6);
+    text-align: center;
+}
+#search.focus-tv {
+  box-shadow: none !important;
+  transform: none !important;
+}
+/* 📜 Kết quả tìm kiếm (hiện ra khi gõ) */
+  #ketqua {
+    position: absolute;
+    margin-top: 2px;
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: #fff0f5;
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: none; /* Ẩn mặc định */
+    z-index: 9; /*kết quả sẽ nằm trên ảnh*/
+  }
+
+  /* 🔹Từng dòng kết quả */
+  #ketqua div {
+    padding: 5px;
+    width: 200px;
+    border-bottom: 2px solid #ffd1dc;
+    cursor: pointer;
+  }
+  #ketqua div.active-item {
+  background-color: #ff8cb4;
+  color: white;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+  }
+  #ketqua div:hover{
+    transform: scale(1.0.5);
+    background-color: rgb(155, 159, 159);
+  }
+.timkiembox{
+    height: 30px;
+    width: 100%;
+    align-items: center;
+    margin-top: 70px;
+}
+.timkiembox {
+    position: relative;
+  }
+
+  .timkiembox input {
+    width: 3000px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding-left: 36px; /* chừa chỗ cho icon */
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .timkiembox input:focus {
+    width: 300px;
+    border-color: #888;
+  }
+
+  .timkiembox::before {
+    content: "🔍"; /* hình kính lúp */
+    position: absolute;
+    align-items: center;
+    top: 4px;
+    font-size: 18px;
+    color: gray;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Khi click vào (focus) input sẽ hiện kính lúp */
+  .timkiembox input:focus + .icon,
+  .timkiembox:focus-within::before {
+    opacity: 1;
+  }
+#ketqua div.active-item {
+  background-color: #888;
+  color: black;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+button, .p{
+  background: linear-gradient(135deg, #d89bbb, #d8eaff);
+  color: #202020;
+  border: none;
+  border-radius: 10px;
+}
+button:hover, .focus-tv{
+  background: linear-gradient(135deg, #00d5ff, #ff9ce6);
+  box-shadow: 0 0 15px 5px #00ffff;
+  color: white;
+}
+
+
