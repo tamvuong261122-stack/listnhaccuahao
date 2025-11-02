@@ -372,15 +372,17 @@ function showVolumeNotification(level) {
 
 // 🎧 Điều khiển âm lượng bằng phím , / .
 document.addEventListener("keydown", function (e) {
+  // Nếu đang gõ trong ô tìm kiếm thì bỏ qua
+  if (document.activeElement.id === "search") return;
+
   if (!mu) return; // Không có bài đang phát thì bỏ qua
   if (e.key === ",") {
     mu.volume = Math.max(0, mu.volume - 0.05);
-    showVolumeNotification(mu.volume);
   } else if (e.key === ".") {
     mu.volume = Math.min(1, mu.volume + 0.05);
-    showVolumeNotification(mu.volume);
   }
 });
+
 
 function timkiem() {
   const input = search.value.toLowerCase().trim();
@@ -427,46 +429,58 @@ function timkiem() {
 const search = document.getElementById("search");
 const ketqua = document.getElementById("ketqua");
 search.addEventListener("keydown", function (e) {
+  // Nếu không có kết quả thì thoát
   if (!currentItems.length) return;
 
-  if (e.key === "ArrowDown") {
+  // Ngăn trình duyệt tự di chuyển con trỏ trong ô input
+  if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
     e.preventDefault();
-    currentFocus++;
-    if (currentFocus >= currentItems.length) currentFocus = 0;
+  }
+
+  if (e.key === "ArrowDown") {
+    currentFocus = (currentFocus + 1) % currentItems.length;
     updateHighlight(currentItems);
   } 
   else if (e.key === "ArrowUp") {
-    e.preventDefault();
-    currentFocus--;
-    if (currentFocus < 0) currentFocus = currentItems.length - 1;
+    currentFocus = (currentFocus - 1 + currentItems.length) % currentItems.length;
     updateHighlight(currentItems);
   } 
   else if (e.key === "Enter") {
   e.preventDefault();
 
-  // Nếu có bài đang chọn bằng mũi tên
-  if (currentFocus > -1) {
-    const selected = currentItems[currentFocus];
-    s1.value = selected.dataset.value; // gán giá trị cho select
-    mo(); // 🔊 phát nhạc
+  const keyword = search.value.trim().toLowerCase();
+  if (keyword === "") return;
+
+  const matched = songs.find(opt =>
+    removeVietnameseTones(opt.textContent).includes(removeVietnameseTones(keyword))
+  );
+
+  if (matched) {
+    const s1 = document.getElementById("s1");
+    s1.value = matched.value;
+
+    // Đợi một chút để đảm bảo giá trị được gán xong rồi mới phát
+    setTimeout(() => {
+      mo(); // 🔊 Phát nhạc ngay
+      current = "mo"; // Chuyển ô sáng sang nút ⏸️
+      updateFocus();
+    }, 50);
   }
-  // Nếu chưa chọn gì, phát bài đầu tiên trong kết quả
-  else if (currentItems.length > 0) {
-    const first = currentItems[0];
-    s1.value = first.dataset.value;
-    mo();
-  }
-  ketqua.style.display = "none"; // ẩn khung kết quả
-  search.value = ""; // xóa chữ trong ô tìm
+
+  ketqua.style.display = "none";
+  search.value = "";
   currentFocus = -1;
-  search.blur(); // thoát khỏi ô tìm kiếm
+  // ⚠️ Không blur ở đây để không chặn âm thanh
 }
-});
+}
+
+);
+
 
 // 🌈 Tự động đổi nền mỗi 10 giây
 const danhSachNen = [
-  "url('reshiram.jpg')",
-  "url('zekrom.jpg')",
+  "url('image/reshiram.jpg')",
+  "url('image/zekrom.jpg')",
 ];
 
 let viTriNen = 0;
@@ -479,8 +493,8 @@ setInterval(() => {
 }, 10000); // ⏰ đổi nền mỗi 10 giây
 // 🎵 Danh sách nhạc nền
 const danhSachNhacNen = [
-  "soundcloudaud.com_Call of Silence.mp3", 
-   "soundcloudaud.com_Thiếu Niên Hoa Hồng Ver Violin -《玫瑰少年 Womxnly》.mp3",
+  "sound/soundcloudaud.com_Call of Silence.mp3", 
+   "sound/soundcloudaud.com_Thiếu Niên Hoa Hồng Ver Violin -《玫瑰少年 Womxnly》.mp3",
 ];
 
 let viTriNhacNen = 0;
@@ -719,12 +733,17 @@ document.addEventListener("keydown", function (e) {
 
   // ⏪ Lùi 5 giây
   if (e.key === ";") {
+    //nếu đang trong ô tìm kiếm sẽ không có tác dụng tua
+    if (document.activeElement.id === "search") return;
+
     mu.currentTime = Math.max(0, mu.currentTime - 5);
     hienThongBao("⏪5s");
   }
 
   // ⏩ Tiến 5 giây
   if (e.key === "'") {
+    //nếu đang trong ô tìm kiếm sẽ không có tác dụng tua
+    if (document.activeElement.id === "search") return;
     mu.currentTime = Math.min(mu.currentTime + 5, mu.duration - 0.1);
     hienThongBao("⏩ 5s");
   }
@@ -753,3 +772,27 @@ function hienThongBao(text) {
     setTimeout(() => msg.remove(), 500);
   }, 100);
 }
+// 🧭 Thanh tua nhạc thủ công
+const soundBar = document.querySelector(".sound-bar");
+const soundProgress = document.querySelector(".sound-progress");
+
+// Cập nhật tiến trình khi phát nhạc
+setInterval(() => {
+  if (mu && !mu.paused && mu.duration) {
+    const value = (mu.currentTime / mu.duration) * 100;
+    soundProgress.style.width = value + "%";
+    soundBar.style.display = "block";
+  } else {
+    soundBar.style.display = "none";
+  }
+}, 200);
+
+// Cho phép click tua
+soundBar.addEventListener("click", (e) => {
+  if (mu && mu.duration) {
+    const rect = soundBar.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left; // vị trí click
+    const newTime = (offsetX / rect.width) * mu.duration;
+    mu.currentTime = newTime; // tua đến vị trí mới
+  }
+});
