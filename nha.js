@@ -479,8 +479,8 @@ search.addEventListener("keydown", function (e) {
 
 // 🌈 Tự động đổi nền mỗi 10 giây
 const danhSachNen = [
-  "url('image/reshiram.jpg')",
-  "url('image/zekrom.jpg')",
+  "url('./image/reshiram.jpg')",
+  "url('./image/zekrom.jpg')",
 ];
 
 let viTriNen = 0;

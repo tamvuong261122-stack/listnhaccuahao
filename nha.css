@@ -1,6 +1,6 @@
 
 body {
-    background-image: url(image/reshiram.jpg); /* Đường dẫn tới ảnh nền */
+    background-image: url(./image/reshiram.jpg); /* Đường dẫn tới ảnh nền */
     background-repeat: no-repeat; /* Không lặp lại ảnh (chỉ hiển thị 1 lần duy nhất) */
     background-position: center center; /* Căn ảnh vào giữa màn hình cả theo chiều ngang lẫn dọc */
     background-attachment: fixed; /* Giữ ảnh nền cố định, không cuộn theo trang (hiệu ứng nền đứng yên) */
