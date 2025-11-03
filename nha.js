@@ -9,7 +9,7 @@ const nut2 = document.getElementById('lui');
         const e = document.querySelectorAll("audio:not(#nhacnen)");              //Gọi tất cả các thẻ audio = e
         const doi = document.getElementById('phattiep');
         const nhacnen =document.getElementById('nhacnen');
-        let volumeLevel = 0.30; 
+        let volumeLevel = 1; 
         let nen = 0;
         e.forEach(a => a.volume = volumeLevel);
         nhacnen.volume = nen;
@@ -807,4 +807,5 @@ soundBar.addEventListener("click", (e) => {
     mu.currentTime = newTime; // tua đến vị trí mới
   }
 });
+
 
