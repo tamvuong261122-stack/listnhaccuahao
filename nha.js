@@ -144,7 +144,7 @@ if (mu && !mu.paused) cheDo = "music"; // 🔊 giữ chế độ âm lượng sa
         "a98": "Cry For Me - Michita ft. Ami (愛海)",
         "a99": "Đáy Biển - Nhất Chi Lựu Liên (Bản Gốc)-[海底一支榴莲]",
         "a100": "Bầu Trời Mới - Da LAB",
-        "a101": "Nếu những Tiếc nuối - Vũ",
+        "a101": "Nếu những Tiếc nuối - Vũ.",
         "a102": "Mất Kết Nối - Dương Domic (Whisky Rmx)",
         "a103": "Bắt Cóc Con Tim (Lofi Ver) - Lou Hoàng ft. OnlyC  x Quanvrox",
         "a104": "Ngày Đẹp Trời Để Nói Chia Tay - Lou Hoàng",
@@ -152,18 +152,18 @@ if (mu && !mu.paused) cheDo = "music"; // 🔊 giữ chế độ âm lượng sa
         "a106": "Đi Để Trở Về 2 (Chuyến Đi Của Năm) - Soobin Hoàng Sơn",
         "a107": "Nơi Pháo Hoa Rực Rỡ (Đi Để Trở Về 8) - Orange x Hoàng Dũng x Cẩm Vân x Hứa Kim Tuyền",
         "a108": "Lao Tâm Khổ Tứ - Thanh Hưng",
-        "a109": "Công Chúa Bong Bóng - An Vũ cover",
-        "a110": "Công Chúa Bong Bóng - An Vũ cover",
-        "a111": "Công Chúa Bong Bóng - An Vũ cover",
-        "a112": "Công Chúa Bong Bóng - An Vũ cover",
-        "a113": "Công Chúa Bong Bóng - An Vũ cover",
-        "a114": "Công Chúa Bong Bóng - An Vũ cover",
-        "a115": "Công Chúa Bong Bóng - An Vũ cover",
-        "a116": "Công Chúa Bong Bóng - An Vũ cover",
-        "a117": "Công Chúa Bong Bóng - An Vũ cover",
-        "a118": "Công Chúa Bong Bóng - An Vũ cover",
-        "a119": "Công Chúa Bong Bóng - An Vũ cover",
-        "a120": "Công Chúa Bong Bóng - An Vũ cover",
+        "a109": "10 Nghàn Năm - PC",
+        "a110": "Thức Giấc - Da LAB",
+        "a111": "Bạc Phận (Piano Ver) - Jack x Liam",
+        "a112": "Sóng Gió (Lofi Ver) - Jack x K-ICM",
+        "a113": "Hoa Hải Đường - Jack (J97)",
+        "a114": "Hoa Vô Sắc - Jack x K-ICM",
+        "a115": "Ngày Này Năm Ấy (Lofi Ver) - Việt Anh",
+        "a116": "Nếu Ngày Ấy (Lofi Ver) - Soobin Hoàng Sơn",
+        "a117": "Những Lời Hứa Bỏ Quên - Vũ. - Dear Jane",
+        "a118": "Bình Yên - Vũ. - Binz",
+        "a119": "Vì Anh Đâu Có Biết - Madihu - Vũ.",
+        "a120": "Yên Bình Có Quá Đắt Không - KHIEM",
         "a121": "Công Chúa Bong Bóng - An Vũ cover",
         };
         e.forEach(a => {                                        //Ẩn thanh tua âm nhạc khi đổi bài
@@ -180,6 +180,7 @@ if (mu && !mu.paused) cheDo = "music"; // 🔊 giữ chế độ âm lượng sa
     nut.innerText = "▶️";
     ten.innerText = content[luachon];
     nhacnen.play();
+    document.querySelector(".sound-wave").style.display = "none";
     mu = null;
     return;
         }
@@ -203,6 +204,7 @@ if (isLooping) {
     nut.innerText = "⏸️";
     nhac.style.display = " block",
     nhacnen.pause()
+    document.querySelector(".sound-wave").style.display = "flex";
     mu = nhac;
   // Khi phát xong tự reset
     nhac.onended = function () {
@@ -212,6 +214,7 @@ if (isLooping) {
     ten.innerHTML = "-- Chọn bài hát --";
     nut.innerText = "▶️";
     nhac.style.display = "none";
+    document.querySelector(".sound-wave").style.display = "none";
     nhacnen.play();
     mu = null;
         }
@@ -804,3 +807,4 @@ soundBar.addEventListener("click", (e) => {
     mu.currentTime = newTime; // tua đến vị trí mới
   }
 });
+
