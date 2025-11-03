@@ -151,7 +151,7 @@ if (mu && !mu.paused) cheDo = "music"; // 🔊 giữ chế độ âm lượng sa
         "a105": "Đi Để Trở Về - Soobin Hoàng Sơn",
         "a106": "Đi Để Trở Về 2 (Chuyến Đi Của Năm) - Soobin Hoàng Sơn",
         "a107": "Nơi Pháo Hoa Rực Rỡ (Đi Để Trở Về 8) - Orange x Hoàng Dũng x Cẩm Vân x Hứa Kim Tuyền",
-        "a108": "Công Chúa Bong Bóng - An Vũ cover",
+        "a108": "Lao Tâm Khổ Tứ - Thanh Hưng",
         "a109": "Công Chúa Bong Bóng - An Vũ cover",
         "a110": "Công Chúa Bong Bóng - An Vũ cover",
         "a111": "Công Chúa Bong Bóng - An Vũ cover",
@@ -492,8 +492,8 @@ setInterval(() => {
 }, 10000); // ⏰ đổi nền mỗi 10 giây
 // 🎵 Danh sách nhạc nền
 const danhSachNhacNen = [
-  "sound/soundcloudaud.com_Call of Silence.mp3", 
-   "sound/soundcloudaud.com_Thiếu Niên Hoa Hồng Ver Violin -《玫瑰少年 Womxnly》.mp3",
+  "./sound2/cos.mp3", 
+  "./sound5/hieunhh.mp3",
 ];
 
 let viTriNhacNen = 0;
