@@ -375,11 +375,12 @@ document.addEventListener("keydown", function (e) {
   // Nếu đang gõ trong ô tìm kiếm thì bỏ qua
   if (document.activeElement.id === "search") return;
 
-  if (!mu) return; // Không có bài đang phát thì bỏ qua
   if (e.key === ",") {
     mu.volume = Math.max(0, mu.volume - 0.05);
+    showVolumeNotification(mu.volume);
   } else if (e.key === ".") {
     mu.volume = Math.min(1, mu.volume + 0.05);
+    showVolumeNotification(mu.volume);
   }
 });
 
@@ -472,9 +473,7 @@ search.addEventListener("keydown", function (e) {
   currentFocus = -1;
   // ⚠️ Không blur ở đây để không chặn âm thanh
 }
-}
-
-);
+});
 
 
 // 🌈 Tự động đổi nền mỗi 10 giây
@@ -548,9 +547,6 @@ document.addEventListener("keydown", function (e) {
     msg.textContent = "🎚️ Đang chọn: OPTION";
 }
 });
-
-
-
 
 // 🎮 DANH SÁCH CÁC NÚT CHÍNH
 const controls = {
