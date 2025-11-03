@@ -430,51 +430,63 @@ function timkiem() {
 const search = document.getElementById("search");
 const ketqua = document.getElementById("ketqua");
 search.addEventListener("keydown", function (e) {
-  // Nếu không có kết quả thì thoát
-  if (!currentItems.length) return;
+  const coChu = search.value.trim() !== "";
 
-  // Ngăn trình duyệt tự di chuyển con trỏ trong ô input
-  if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
+  // Khi có chữ trong ô tìm → chặn mũi tên trái/phải
+  if (coChu && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
     e.preventDefault();
+    return; // không làm gì hết
   }
 
-  if (e.key === "ArrowDown") {
-    currentFocus = (currentFocus + 1) % currentItems.length;
-    updateHighlight(currentItems);
-  } 
-  else if (e.key === "ArrowUp") {
-    currentFocus = (currentFocus - 1 + currentItems.length) % currentItems.length;
-    updateHighlight(currentItems);
-  } 
-  else if (e.key === "Enter") {
-  e.preventDefault();
+  // Khi có chữ trong ô tìm → mũi tên lên/xuống để chọn kết quả
+  if (coChu && ["ArrowUp", "ArrowDown", "Enter"].includes(e.key)) {
+    e.preventDefault();
 
-  const keyword = search.value.trim().toLowerCase();
-  if (keyword === "") return;
+    if (e.key === "ArrowDown") {
+      if (currentItems.length > 0) {
+        currentFocus = (currentFocus + 1) % currentItems.length;
+        updateHighlight(currentItems);
+      }
+    } else if (e.key === "ArrowUp") {
+      if (currentItems.length > 0) {
+        currentFocus = (currentFocus - 1 + currentItems.length) % currentItems.length;
+        updateHighlight(currentItems);
+      }
+    } else if (e.key === "Enter") {
+      if (currentItems.length > 0) {
+        if (currentFocus > -1) {
+          const selected = currentItems[currentFocus];
+          s1.value = selected.dataset.value;
+          mo();
+        } else {
+          const first = currentItems[0];
+          s1.value = first.dataset.value;
+          mo();
+        }
+      } else {
+        timkiem();
+        const first = ketqua.querySelector("div");
+        if (first) {
+          s1.value = first.dataset.value;
+          mo();
+        }
+      }
 
-  const matched = songs.find(opt =>
-    removeVietnameseTones(opt.textContent).includes(removeVietnameseTones(keyword))
-  );
-
-  if (matched) {
-    const s1 = document.getElementById("s1");
-    s1.value = matched.value;
-
-    // Đợi một chút để đảm bảo giá trị được gán xong rồi mới phát
-    setTimeout(() => {
-      mo(); // 🔊 Phát nhạc ngay
-      current = "mo"; // Chuyển ô sáng sang nút ⏸️
-      updateFocus();
-    }, 50);
+      ketqua.style.display = "none";
+      search.value = "";
+      currentFocus = -1;
+      search.blur();
+    }
+    return; // kết thúc xử lý trong ô tìm
   }
 
-  ketqua.style.display = "none";
-  search.value = "";
-  currentFocus = -1;
-  // ⚠️ Không blur ở đây để không chặn âm thanh
-}
+  // Nếu ô tìm trống thì reset danh sách
+  if (!coChu) {
+    currentFocus = -1;
+    currentItems = [];
+    ketqua.style.display = "none";
+  }
 });
-
 
 // 🌈 Tự động đổi nền mỗi 10 giây
 const danhSachNen = [
