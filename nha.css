@@ -277,3 +277,60 @@ button:hover, .focus-tv{
   box-shadow: 0 0 15px 5px #00ffff;
   color: white;
 }
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+
+  .chay{
+  margin-top: -650px;
+  font-size: 30px;
+  color: rgb(246, 0, 0);
+  text-shadow: 0 0 2px white, 0 0 10px red;
+  position: fixed;
+}
+
+  .he {
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 100px;
+  font-weight: 1000;
+  }
+
+  .k{
+  margin-top: 80px;
+  }
+
+  #ten {
+  width: 350px;
+  margin-top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  }
+
+  .sound-bar {
+    width: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .main {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+  }
+
+  .s2 {
+    width: 50%;
+    font-size: 16px;
+  }
+
+  .pk {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    margin-top: 350px;
+  }
+}
