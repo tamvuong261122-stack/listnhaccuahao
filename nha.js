@@ -40,7 +40,7 @@ if (mu && !mu.paused) cheDo = "music"; // 🔊 giữ chế độ âm lượng sa
         const ten =document.getElementById('ten');
         if(!luachon){
           if(isRandom) return;
-            alert("Chọn bài hát đi tk L");
+            alert("Chọn bài hát đi tk L 😏");
             return;
         }
         const nhac = document.getElementById(luachon);
@@ -244,7 +244,7 @@ if (isLooping) {
   const nhac = document.getElementById(luachon);
 
   if (!nhac) {
-    alert("Chưa có bài hát nào được phát!");
+    alert("Chưa có bài hát sao phát lại dc tk L 😏");
     return;
   }
 
@@ -437,8 +437,7 @@ search.addEventListener("keydown", function (e) {
 
   // Khi có chữ trong ô tìm → chặn mũi tên trái/phải
   if (coChu && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
-    e.preventDefault();
-    return; // không làm gì hết
+    return; 
   }
 
   // Khi có chữ trong ô tìm → mũi tên lên/xuống để chọn kết quả
@@ -807,5 +806,4 @@ soundBar.addEventListener("click", (e) => {
     mu.currentTime = newTime; // tua đến vị trí mới
   }
 });
-
 

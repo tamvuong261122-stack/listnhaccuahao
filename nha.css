@@ -286,7 +286,7 @@ button:hover, .focus-tv{
 
 .sound-wave {
   position: fixed;
-  top: 550px;
+  top: 560px;
   left: 50%;
   transform: translateX(-50%);
   display: none;
