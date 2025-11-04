@@ -180,7 +180,7 @@ if (mu && !mu.paused) cheDo = "music"; // 🔊 giữ chế độ âm lượng sa
     nut.innerText = "▶️";
     ten.innerText = content[luachon];
     nhacnen.play();
-    document.querySelector(".sound-wave").style.display = "none";
+  
     mu = null;
     return;
         }
@@ -204,7 +204,6 @@ if (isLooping) {
     nut.innerText = "⏸️";
     nhac.style.display = " block",
     nhacnen.pause()
-    document.querySelector(".sound-wave").style.display = "flex";
     mu = nhac;
   // Khi phát xong tự reset
     nhac.onended = function () {
@@ -214,7 +213,6 @@ if (isLooping) {
     ten.innerHTML = "-- Chọn bài hát --";
     nut.innerText = "▶️";
     nhac.style.display = "none";
-    document.querySelector(".sound-wave").style.display = "none";
     nhacnen.play();
     mu = null;
         }
@@ -806,4 +804,187 @@ soundBar.addEventListener("click", (e) => {
     mu.currentTime = newTime; // tua đến vị trí mới
   }
 });
+
+//Ngày và giờ
+function updateClock() {
+    const now = new Date();
+
+    // Giờ và phút
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById("time").innerText = `${hours}:${minutes}`;
+
+    // Hiển thị dạng "Th 3, 4 thg 11, 2025"
+    const days = ['CN', 'Th 2', 'Th 3', 'Th 4', 'Th 5', 'Th 6', 'Th 7'];
+    const day = days[now.getDay()];
+    const date = now.getDate();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+
+    document.getElementById("date").innerText =
+      `${day}, ${date} thg ${month}, ${year}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+
+window.addEventListener("load", () => {
+  // 🎂 Danh sách sinh nhật
+  const danhSachSinhNhat = [
+    { ten: "Nguyễn Minh Mẫn", ngay: 20, thang: 11, bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Trung Hiếu", ngay: 11, thang: 5, bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Lê Nguyễn Chí Khang", ngay: 5, thang: 11, bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Hoàng Hảo", ngay: 20, thang: 8, bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Thành Đạt", ngay: 12, thang: 3, bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Trần Thị Hồng Đào", ngay: 30, thang: 6, bai: "./sound6/sinhnhat.mp3" },
+  ];
+
+  const homNay = new Date();
+  const ngay = homNay.getDate();
+  const thang = homNay.getMonth() + 1;
+
+  // 🔍 Kiểm tra xem hôm nay có ai sinh nhật không
+  const nguoiSinhNhat = danhSachSinhNhat.find(n => n.ngay === ngay && n.thang === thang);
+  if (!nguoiSinhNhat) return; // nếu không ai sinh nhật hôm nay thì thôi
+
+  // 🧍‍♂️ Hiện bảng nhập tên (popup đẹp)
+  const popup = document.createElement("div");
+  popup.className = "birthday-popup";
+  popup.innerHTML = `
+    <div class="birthday-box">
+      mình có món quà nho nhỏ dành tặng cho một người đặc biệt 🎉<br>
+      Vậy nên bạn cho mình xin đầy đủ họ tên có dấu bạn nhé 💖
+      <br><br>
+      <input type="text" id="tenNguoiDung" placeholder="Nhập tên của bạn..." style="
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+        width: 80%;
+        font-size: 16px;
+        text-align: center;
+        outline: none;
+      " />
+      <br><br>
+      <button id="xacNhanTen" style="
+        background: #00d5ff;
+        border: none;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      ">Xác nhận</button>
+    </div>
+  `;
+  document.body.appendChild(popup);
+
+  const nutXacNhan = document.getElementById("xacNhanTen");
+  const oNhap = document.getElementById("tenNguoiDung");
+
+  // 🎈 Hàm hiện bảng nhỏ “năn nỉ”
+  function hienBangNanNi() {
+    const nanNi = document.createElement("div");
+    nanNi.className = "birthday-popup";
+    nanNi.innerHTML = `
+      <div class="birthday-box">
+        Năn nỉ ă Cho mình xin tên đi mòa 🥺
+      </div>
+    `;
+    document.body.appendChild(nanNi);
+    setTimeout(() => nanNi.remove(), 3100);
+  }
+
+  nutXacNhan.addEventListener("click", () => {
+    const tenNhap = oNhap.value.trim();
+
+    // ⚠️ Nếu chưa nhập tên → hiện popup “năn nỉ”
+    if (!tenNhap) {
+      hienBangNanNi();
+      return;
+    }
+
+    // ❌ Nếu nhập sai tên
+    if (tenNhap.toLowerCase() !== nguoiSinhNhat.ten.toLowerCase()) {
+      popup.innerHTML = `
+        <div class="birthday-box">
+        Xin lỗi vì đã làm phiền bạn, mình mời bạn tiếp tục nghe nhạc ạ 😔<br>
+        Haizz tiếc la bạn không phải người ấy 💔
+        </div>
+      `;
+      setTimeout(() => popup.remove(), 5000);
+      return;
+    }
+
+    // ✅ Nếu đúng tên → hiện nút xem điều bất ngờ
+    popup.innerHTML = `
+      <div class="birthday-box">
+        🎂 Xin chào ${nguoiSinhNhat.ten}! 💕<br>
+        <button id="nutBatDau" style="
+          background: linear-gradient(135deg, #ff9ce6, #00d5ff);
+          border: none;
+          color: white;
+          padding: 12px 25px;
+          border-radius: 12px;
+          font-size: 18px;
+          cursor: pointer;
+          margin-top: 20px;
+          box-shadow: 0 0 15px #00ffff;
+        ">🎁 Nhấn để xem điều bất ngờ 🎉</button>
+      </div>
+    `;
+
+     const nutBatDau = document.getElementById("nutBatDau");
+    nutBatDau.addEventListener("click", () => {
+      // 🎉 Hiện bảng chúc mừng có nút X
+      popup.innerHTML = `
+        <div class="birthday-box" style="position: relative;">
+          <button id="dongSinhNhat" style="
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+          ">✖</button>
+          🎉 Chúc mừng sinh nhật ${nguoiSinhNhat.ten}! 🎂<br>
+          Chúc bạn có một ngày thật vui vẻ và hạnh phúc 💖
+        </div>
+      `;
+
+      // 🎵 Phát nhạc sinh nhật
+      const audio = new Audio(nguoiSinhNhat.bai);
+      audio.volume = 0.5;
+      audio.play().catch(() => {
+        console.log("Trình duyệt chặn phát nhạc.");
+      });
+
+      // ❌ Khi bấm nút X → dừng nhạc + đóng bảng
+      const nutDong = document.getElementById("dongSinhNhat");
+      nutDong.addEventListener("click", () => {
+        audio.pause();
+        audio.currentTime = 0;
+        popup.remove();
+      });
+
+      // Tự tắt sau khi nhạc phát xong
+      audio.addEventListener("ended", () => {
+        popup.remove();
+      });
+    });
+  });
+});
+// 🧩 TẠM TẮT PHÍM TẮT KHI NHẬP TÊN SINH NHẬT
+document.addEventListener("keydown", function (e) {
+  const input = document.activeElement;
+
+  // Nếu đang nhập trong ô input (tên, tìm kiếm, v.v.)
+  if (input && (input.tagName === "INPUT" || input.tagName === "TEXTAREA")) {
+    // Không cho code điều khiển nhạc, tìm kiếm, … bắt phím này
+    e.stopImmediatePropagation();
+    return; // để bàn phím hoạt động bình thường như Word
+  }
+}, true); // <-- quan trọng: dùng chế độ capture để chạy TRƯỚC các hàm khác
+
 

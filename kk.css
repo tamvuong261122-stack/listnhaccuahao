@@ -1,0 +1,183 @@
+body {
+  background-image: url(./image/reshiram.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Pacifico', cursive;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ----- Tiêu đề chạy trên cùng ----- */
+.chay {
+  margin-top: 20px;
+  font-size: 24px;
+  color: rgb(255, 60, 60);
+  text-shadow: 0 0 4px white, 0 0 10px red;
+}
+
+/* ----- Thời gian & tìm kiếm ----- */
+.timkiembox {
+  margin-top: 100px;
+}
+
+.timee {
+  margin-bottom: 10px;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+}
+
+#time {
+  font-size: 40px;
+  font-weight: bold;
+  color: #00ffff;
+}
+
+#date {
+  font-size: 18px;
+  color: #e0e0e0;
+}
+
+/* Thanh tìm kiếm */
+.search-chill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  margin: 0 auto;
+  padding: 8px 15px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.search-chill:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.6);
+  border-color: rgba(0, 255, 200, 0.4);
+}
+
+.search-chill input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.search-chill input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* ----- Danh sách nhạc ----- */
+.he {
+  margin-top: 40px;
+  font-size: 80px;
+  font-weight: 900;
+  background: linear-gradient(to right, #00FFFF, #FF00FF);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.k {
+  margin-top: 10px;
+  color: #FF0000;
+  text-shadow: 0 0 3px #fff;
+}
+
+#ten {
+  margin-top: 10px;
+  color: #fff;
+  text-shadow: 0 0 4px #00ffff;
+}
+
+/* ----- Thanh phát nhạc ----- */
+.sound-bar {
+  width: 320px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin: 20px auto;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.sound-progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #00ffaa);
+  transition: width 0.2s linear;
+}
+
+/* ----- Nút chọn bài & điều khiển ----- */
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.s2 {
+  width: 200px;
+  height: 45px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #00d5ff, #ff9ce6);
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.p {
+  width: 50px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  background: linear-gradient(135deg, #d89bbb, #d8eaff);
+  transition: 0.2s;
+}
+
+.p:hover {
+  background: linear-gradient(135deg, #00d5ff, #ff9ce6);
+  color: white;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* ----- Nút lặp và phát tiếp ----- */
+.pk {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.pl, .pt {
+  width: 150px;
+  height: 40px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background: linear-gradient(90deg, #00ffff, #00ff80);
+  box-shadow: 0 0 8px #00ffff;
+  transition: 0.3s;
+}
+
+.pl:hover, .pt:hover {
+  background: linear-gradient(90deg, #ff00ff, #ff9ce6);
+  box-shadow: 0 0 15px #ff00ff;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 600px) {
+  .search-chill, .sound-bar { width: 85%; }
+  .he { font-size: 50px; }
+  .s2 { width: 50%; font-size: 16px; }
+}

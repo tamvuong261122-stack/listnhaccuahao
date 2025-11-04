@@ -19,14 +19,32 @@ body {
 .chay{
   margin-top: -680px;
   font-size: 30px;
-  color: rgb(246, 0, 0);
-  text-shadow: 0 0 2px white, 0 0 10px red;
+  color: rgb(255, 60, 60);
+  text-shadow: 0 0 4px white, 0 0 10px red;
   position: fixed;
+}
+
+.timee{
+  text-align: center;
+  margin-top: -380px;
+  font-family: 'Arial', sans-serif;
+}
+#time {
+      font-size: 48px;
+      font-weight: bold;
+      color: #e2f45ecc;
+      text-shadow: 0 0 6px rgb(212, 255, 0);
+    }
+#date {
+      font-size: 24px;
+      margin-top: 10px;
+      color: white;
+      text-shadow: 0 0 6px rgb(212, 255, 0);
 }
 
 .timkiembox {
   position: fixed;
-  top: 150px;
+  top: 230px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -38,8 +56,9 @@ body {
   align-items: center;
   width: 320px;
   margin: 20px auto;
-  background: rgba(240, 236, 236, 0.05);
+  background:  rgba(0, 255, 200, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #4a4a4a;
   border-radius: 25px;
   padding: 8px 15px;
   backdrop-filter: blur(10px);
@@ -127,7 +146,7 @@ body {
 
 .he {
   position: fixed;
-  top: 120px; /* Đặt vị trí cách trên 10px */
+  top: 200px; /* Đặt vị trí cách trên 10px */
   left: 50%;
   transform: translateX(-50%);
   font-size: 100px;
@@ -141,7 +160,7 @@ body {
 
 .k{
   position: fixed;
-  margin-top: 20px;
+  margin-top: 180px;
   color: #FF0000;
   text-shadow: 0 0 3px #fff;
 }
@@ -149,11 +168,11 @@ body {
 #ten{
   position: fixed;
   width: 280px;
-  margin-top: 10px;
+  margin-top: 235px;
   left: 50%;
   transform: translateX(-50%);
-  color: black;
-  text-shadow: 0 0 2px white;
+  color: #fff;
+  text-shadow: 0 0 4px #00ffff;
 }
 
 /* Thanh ngang phát nhạc */
@@ -162,7 +181,7 @@ body {
   height: 8px;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
-  margin-top: 185px;
+  margin-top: 260px;
   position: fixed;
   top: 245px; /* vừa nằm dưới thanh chọn bài hát */
   left: 50%;
@@ -182,16 +201,15 @@ body {
 }
 
 .sound-progress {
-  width: 0%;
+width: 0%;
   height: 100%;
   background: linear-gradient(90deg, #00ffff, #00ffaa);
-  box-shadow: 0 0 15px #00ffff;
   transition: width 0.2s linear;
 }
 
 .main {
   position: fixed; /* hoặc fixed nếu bạn muốn cố định */
-  margin-top: 240px;
+  margin-top: 390px;
   left: 50%;
   transform: translate(-50%, -50%); /* căn giữa theo cả hai trục */
   display: flex;
@@ -242,7 +260,7 @@ body {
 
 .pk{
   position: fixed; /* hoặc fixed nếu bạn muốn cố định */
-  margin-top: 330px;
+  margin-top: 485px;
   left: 50%;
   transform: translate(-50%, -50%); /* căn giữa theo cả hai trục */
   display: flex;
@@ -280,165 +298,62 @@ button, .p{
 }
 button:hover, .focus-tv{
   background: linear-gradient(135deg, #00d5ff, #ff9ce6);
-  box-shadow: 0 0 15px 5px #00ffff;
+  box-shadow: 0 0 15px 1px #00ffff;
   color: white;
 }
 
-.sound-wave {
+.birthday-popup {
   position: fixed;
-  top: 560px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: none;
-  gap: 4px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.5s ease;
 }
 
-.sound-wave span {
-  display: block;
-  width: 6px;
-  height: 20px;
-  background: #00ffff;
-  border-radius: 3px;
-  animation: wave 1s ease-in-out infinite;
+.birthday-box {
+  background: linear-gradient(135deg, #ff9ce6, #00d5ff);
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #00ffff;
+  animation: pop 0.8s ease;
 }
 
-.sound-wave span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.sound-wave span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-.sound-wave span:nth-child(4) {
-  animation-delay: 0.6s;
-}
-.sound-wave span:nth-child(5) {
-  animation-delay: 0.8s;
-}
-.sound-wave span:nth-child(6) {
-  animation-delay: 0.2s;
-}
-.sound-wave span:nth-child(7) {
-  animation-delay: 0.4s;
-}
-.sound-wave span:nth-child(8) {
-  animation-delay: 0.6s;
-}
-.sound-wave span:nth-child(9) {
-  animation-delay: 0.8s;
-}
-.sound-wave span:nth-child(10) {
-  animation-delay: 0.2s;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes wave {
-  100%, 0% { height: 10px; }
-  50%{height: 30px;}
+@keyframes pop {
+  0% { transform: scale(0.7); }
+  100% { transform: scale(1); }
 }
 
+/* ---------- Giữ bố cục giống máy tính trên điện thoại ---------- */
 @media screen and (max-width: 768px) {
-  body {
-    overflow: auto;
+  html, body {
+    transform-origin: top center;
+    overflow: hidden;
   }
 
-  .chay{
-  margin-top: -650px;
-  font-size: 30px;
-  color: rgb(246, 0, 0);
-  text-shadow: 0 0 2px white, 0 0 10px red;
-  position: fixed;
-}
-
-  .he {
-  top: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 100px;
-  font-weight: 1000;
-  }
-
-  .k{
-  margin-top: 80px;
-  }
-
-  #ten {
-  width: 350px;
-  margin-top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  }
-
-  .sound-bar {
-    width: 85%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .main {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-  }
-
-  .s2 {
-    width: 50%;
-    font-size: 16px;
-  }
-
-  .pk {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    margin-top: 350px;
-  }
-}
-
-.sound-wave {
-  position: fixed;
-  bottom: 100px; /* chỗ muốn hiển thị */
-  left: 50%;
-  transform: translateX(-50%);
-  display: none;
-  gap: 4px;
-}
-
-.sound-wave span {
-  display: block;
-  width: 6px;
-  height: 20px;
-  background: #00ffff;
-  border-radius: 3px;
-  animation: wave 1s ease-in-out infinite;
-}
-
-.sound-wave span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.sound-wave span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-.sound-wave span:nth-child(4) {
-  animation-delay: 0.6s;
-}
-.sound-wave span:nth-child(5) {
-  animation-delay: 0.8s;
-}
-.sound-wave span:nth-child(6) {
-  animation-delay: 0.2s;
-}
-.sound-wave span:nth-child(7) {
-  animation-delay: 0.4s;
-}
-.sound-wave span:nth-child(8) {
-  animation-delay: 0.6s;
-}
-.sound-wave span:nth-child(9) {
-  animation-delay: 0.8s;
-}
-.sound-wave span:nth-child(10) {
-  animation-delay: 0.2s;
-}
-
-@keyframes wave {
-  100%, 0% { height: 10px; }
-  50%{height: 30px;}
+  /* Cố định lại vị trí để không bị lệch */
+  .chay { margin-top: -650px;}
+  .timee { margin-top: -350px; }
+  #time { font-size: 36px; }
+  #date { font-size: 18px; }
+  .timkiembox { top: 200px; }
+  .he {top: 160px; }
+  .k { margin-top: 140px;}
+  #ten { margin-top: 210px; }
+  .sound-bar {top: 200px; }
+  .main { margin-top: 340px; }
+  .pk { margin-top: 435px; }
 }
