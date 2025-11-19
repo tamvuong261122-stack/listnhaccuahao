@@ -828,52 +828,93 @@ function updateClock() {
   updateClock();
   setInterval(updateClock, 1000);
 
+  // 💖 Hiệu ứng nổ emoji (trái tim và pháo hoa)
+let heartExplosionInterval = null;
+
+function batDauNoIcon() {
+  const icons = ["❤️", "💖", "🎉", "🎈", "✨", "🌟"];
+  heartExplosionInterval = setInterval(() => {
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "emoji-effect";
+      heart.textContent = icons[Math.floor(Math.random() * icons.length)];
+
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      heart.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
+      heart.style.opacity = Math.random() * 0.8 + 0.2;
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1200);
+    }
+  }, 500);
+}
+
+function dungNoIcon() {
+  clearInterval(heartExplosionInterval);
+  document.querySelectorAll(".emoji-effect").forEach(e => e.remove());
+}
+
+// 🎂 Hiệu ứng mưa bánh kem
+let muaBanhKemInterval = null;
+
+function batDauMuaBanhKem() {
+  const icons = ["🎂", "🍰", "🧁", "🎊"];
+  const soLuong = 1;
+  muaBanhKemInterval = setInterval(() => {
+    for (let i = 0; i < soLuong; i++) {
+      const icon = document.createElement("div");
+      icon.className = "cake-fall";
+      icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+      icon.style.left = Math.random() * 100 + "vw";
+      icon.style.fontSize = 20 + Math.random() * 40 + "px";
+      icon.style.animationDuration = 5 + Math.random() * 4 + "s";
+      document.body.appendChild(icon);
+      setTimeout(() => icon.remove(), 5000);
+    }
+  }, 300);
+}
+
+function dungMuaBanhKem() {
+  clearInterval(muaBanhKemInterval);
+  document.querySelectorAll(".cake-fall").forEach(e => e.remove());
+}
+
+// 🎂 Sinh nhật: hỏi tên, kiểm tra, nhạc và hiệu ứng
 window.addEventListener("load", () => {
-  // 🎂 Danh sách sinh nhật
   const danhSachSinhNhat = [
-    { ten: "Nguyễn Minh Mẫn", ngay: 20, thang: 11, bai: "./sound6/sinhnhat.mp3" },
-    { ten: "Nguyễn Trung Hiếu", ngay: 11, thang: 5, bai: "./sound6/sinhnhat.mp3" },
-    { ten: "Lê Nguyễn Chí Khang", ngay: 5, thang: 11, bai: "./sound6/sinhnhat.mp3" },
-    { ten: "Nguyễn Hoàng Hảo", ngay: 20, thang: 8, bai: "./sound6/sinhnhat.mp3" },
-    { ten: "Nguyễn Thành Đạt", ngay: 12, thang: 3, bai: "./sound6/sinhnhat.mp3" },
-    { ten: "Trần Thị Hồng Đào", ngay: 30, thang: 6, bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Minh Mẫn", ngay: 20, thang: 11, moDau: "./sound6/batngo1.mp3", bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Hoàng Hảo", ngay: 20, thang: 8, moDau: "./sound6/batngo1.mp3", bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Trần Thị Hồng Đào", ngay: 30, thang: 6, moDau: "./sound6/batngo1.mp3", bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Lê Nguyễn Chí Khang", ngay: 5, thang: 11, moDau: "./sound6/batngo1.mp3", bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Trung Hiếu", ngay: 11, thang: 5, moDau: "./sound6/batngo1.mp3", bai: "./sound6/sinhnhat.mp3" },
+    { ten: "Nguyễn Thành Đạt", ngay: 12, thang: 3, moDau: "./sound6/batngo1.mp3", bai: "./sound6/sinhnhat.mp3" }
   ];
 
   const homNay = new Date();
   const ngay = homNay.getDate();
   const thang = homNay.getMonth() + 1;
-
-  // 🔍 Kiểm tra xem hôm nay có ai sinh nhật không
   const nguoiSinhNhat = danhSachSinhNhat.find(n => n.ngay === ngay && n.thang === thang);
-  if (!nguoiSinhNhat) return; // nếu không ai sinh nhật hôm nay thì thôi
+  if (!nguoiSinhNhat) return;
 
-  // 🧍‍♂️ Hiện bảng nhập tên (popup đẹp)
   const popup = document.createElement("div");
   popup.className = "birthday-popup";
   popup.innerHTML = `
     <div class="birthday-box">
-      mình có món quà nho nhỏ dành tặng cho một người đặc biệt 🎉<br>
-      Vậy nên bạn cho mình xin đầy đủ họ tên có dấu bạn nhé 💖
-      <br><br>
+      Tớ có món quà nhỏ dành dành tặng cho một người, vì hôm nay là ngày đặc biệt của người ấy 🎉<br>
+      Cậu có thể cho tớ xin đầy đủ họ tên có dấu của cậu được không, để tớ xem cậu có phải người ấy hay không 💖
+      <br>
       <input type="text" id="tenNguoiDung" placeholder="Nhập tên của bạn..." style="
-        padding: 10px 15px;
-        border: none;
-        border-radius: 10px;
-        width: 80%;
-        font-size: 16px;
-        text-align: center;
-        outline: none;
-      " />
-      <br><br>
+        padding:10px 15px;border:none;border-radius:10px;width:80%;margin:20px;
+        font-size:16px;text-align:center;outline:none;" />
+      <br>
       <button id="xacNhanTen" style="
-        background: #00d5ff;
-        border: none;
-        color: white;
-        padding: 10px 25px;
-        border-radius: 10px;
-        font-size: 16px;
-        cursor: pointer;
-      ">Xác nhận</button>
+        background:#00d5ff;border:none;color:white;
+        padding:10px;border-radius:10px;font-size:16px;cursor:pointer;margin:10px">
+        Xác nhận
+      </button>
     </div>
   `;
   document.body.appendChild(popup);
@@ -881,110 +922,143 @@ window.addEventListener("load", () => {
   const nutXacNhan = document.getElementById("xacNhanTen");
   const oNhap = document.getElementById("tenNguoiDung");
 
-  // 🎈 Hàm hiện bảng nhỏ “năn nỉ”
-  function hienBangNanNi() {
+  function hienBangNanNi(text = "Năn nỉ ă cho tớ xin tên đi mòa 🥺") {
     const nanNi = document.createElement("div");
     nanNi.className = "birthday-popup";
-    nanNi.innerHTML = `
-      <div class="birthday-box">
-        Năn nỉ ă Cho mình xin tên đi mòa 🥺
-      </div>
-    `;
+    nanNi.innerHTML = `<div class="birthday-box">${text}</div>`;
     document.body.appendChild(nanNi);
-    setTimeout(() => nanNi.remove(), 3100);
+    setTimeout(() => nanNi.remove(), 3000);
   }
+
+  let audioMoDau = null;
 
   nutXacNhan.addEventListener("click", () => {
     const tenNhap = oNhap.value.trim();
+    if (!tenNhap) return hienBangNanNi();
 
-    // ⚠️ Nếu chưa nhập tên → hiện popup “năn nỉ”
-    if (!tenNhap) {
-      hienBangNanNi();
-      return;
-    }
-
-    // ❌ Nếu nhập sai tên
     if (tenNhap.toLowerCase() !== nguoiSinhNhat.ten.toLowerCase()) {
       popup.innerHTML = `
         <div class="birthday-box">
-        Xin lỗi vì đã làm phiền bạn, mình mời bạn tiếp tục nghe nhạc ạ 😔<br>
-        Haizz tiếc la bạn không phải người ấy 💔
-        </div>
-      `;
-      setTimeout(() => popup.remove(), 5000);
+          Xin lỗi vì đã làm phiền cậu, tớ mời cậu thưởng thức nhạc tiếp ạ 😔<br>
+          Thật buồn, cậu không phải là người ấy 💔
+        </div>`;
+      setTimeout(() => popup.remove(), 4000);
       return;
     }
 
-    // ✅ Nếu đúng tên → hiện nút xem điều bất ngờ
     popup.innerHTML = `
       <div class="birthday-box">
-        🎂 Xin chào ${nguoiSinhNhat.ten}! 💕<br>
+        Chào cậu ${nguoiSinhNhat.ten}! 💕<br>
         <button id="nutBatDau" style="
-          background: linear-gradient(135deg, #ff9ce6, #00d5ff);
-          border: none;
-          color: white;
-          padding: 12px 25px;
-          border-radius: 12px;
-          font-size: 18px;
-          cursor: pointer;
-          margin-top: 20px;
-          box-shadow: 0 0 15px #00ffff;
-        ">🎁 Nhấn để xem điều bất ngờ 🎉</button>
-      </div>
-    `;
+          background:linear-gradient(135deg,#ff9ce6,#00d5ff);
+          border:none;color:white;padding:12px 25px;
+          border-radius:12px;font-size:18px;cursor:pointer;
+          margin-top:20px;box-shadow:0 0 15px #00ffff;">
+          🎁 Bất ngờ ở đây click vào tớ đi (: 🎉
+        </button>
+      </div>`;
 
-     const nutBatDau = document.getElementById("nutBatDau");
-    nutBatDau.addEventListener("click", () => {
-      // 🎉 Hiện bảng chúc mừng có nút X
-      popup.innerHTML = `
-        <div class="birthday-box" style="position: relative;">
-          <button id="dongSinhNhat" style="
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-          ">✖</button>
-          🎉 Chúc mừng sinh nhật ${nguoiSinhNhat.ten}! 🎂<br>
-          Chúc bạn có một ngày thật vui vẻ và hạnh phúc 💖
-        </div>
-      `;
-
-      // 🎵 Phát nhạc sinh nhật
-      const audio = new Audio(nguoiSinhNhat.bai);
-      audio.volume = 0.5;
-      audio.play().catch(() => {
-        console.log("Trình duyệt chặn phát nhạc.");
-      });
-
-      // ❌ Khi bấm nút X → dừng nhạc + đóng bảng
-      const nutDong = document.getElementById("dongSinhNhat");
-      nutDong.addEventListener("click", () => {
-        audio.pause();
-        audio.currentTime = 0;
-        popup.remove();
-      });
-
-      // Tự tắt sau khi nhạc phát xong
-      audio.addEventListener("ended", () => {
-        popup.remove();
-      });
+    batDauNoIcon();
+    audioMoDau = new Audio(nguoiSinhNhat.moDau);
+    audioMoDau.volume = 0.5;
+    audioMoDau.addEventListener("loadedmetadata", () => {
+      if (audioMoDau.duration > 43) audioMoDau.currentTime = 43;
+      audioMoDau.play().catch(()=>{});
     });
+
+    const nutBatDau = document.getElementById("nutBatDau");
+   nutBatDau.addEventListener("click", () => {
+  // Dừng nhạc mở đầu + hiệu ứng icon
+  dungNoIcon();
+  if (audioMoDau) { audioMoDau.pause(); audioMoDau.currentTime = 0; }
+
+  // 🎂 Bắt đầu mưa bánh kem
+  batDauMuaBanhKem();
+
+  // Phát nhạc sinh nhật
+  const audio = new Audio(nguoiSinhNhat.bai);
+  audio.volume = 0.6;
+  audio.play().catch(()=>{});
+
+  // Danh sách các lời chúc tuần tự
+  const loiChuc = [
+    `🎉 Chúc mừng sinh nhật cậu ${nguoiSinhNhat.ten} 🎂<br>
+    Chúc cậu có một ngày thật vui vẻ và tràn đầy hạnh phúc 💖`,
+    `🍀 Chúc mừng sinh nhật nhé 040425, chúc 040425 có nhiều con ghệ không chỉ có X mà còn có NA nữa (;  ✨`,
+    `😊 Đừng có cay nhe (; 💫`,
+    `😅 Và lời chúc cuối cùng là Ditmemay =)`
+  ];
+
+  let index = 0;
+  popup.innerHTML = `<div class="birthday-box" id="loiChucBox" style="position:relative;">${loiChuc[index]}</div>`;
+  const loiChucBox = document.getElementById("loiChucBox");
+
+  // ⏱ Thời gian tự động chuyển
+  const thoiGianChuyen = [12000, 12000, 12000]; // khoảng thời gian giữa các câu
+  let timer = null;
+
+  // ⚡ Hàm hiển thị câu tiếp theo
+  function hienCauTiepTheo() {
+    if (index < loiChuc.length - 1) {
+      index++;
+      loiChucBox.innerHTML = loiChuc[index];
+
+      // Nếu là câu cuối → thêm nút ✖ góc phải
+      if (index === loiChuc.length - 1) {
+        loiChucBox.innerHTML += `
+          <button id="dongSinhNhat" style="
+            position:absolute;
+            top:10px;
+            right:15px;
+            background:transparent;
+            border:none;
+            color:white;
+            font-size:22px;
+            cursor:pointer;">✖</button>
+        `;
+        const nutDong = document.getElementById("dongSinhNhat");
+        nutDong.addEventListener("click", () => {
+          audio.pause();
+          dungMuaBanhKem();
+          popup.remove();
+        });
+      } else {
+        // nếu chưa phải câu cuối → tiếp tục setTimeout
+        clearTimeout(timer);
+        timer = setTimeout(hienCauTiepTheo, thoiGianChuyen[index - 1]);
+      }
+    }
+  }
+
+  // ⏱ Tự động chạy các câu chúc theo thời gian
+  timer = setTimeout(hienCauTiepTheo, thoiGianChuyen[0]);
+
+  // 🖱 Click bất kỳ đâu trong popup để tua nhanh qua câu kế tiếp
+  popup.addEventListener("click", (e) => {
+    // bỏ qua khi click vào nút ✖
+    if (e.target.id === "dongSinhNhat") return;
+    clearTimeout(timer);
+    hienCauTiepTheo();
+  });
+
+  // 🎵 Khi nhạc kết thúc → tự đóng popup
+  audio.addEventListener("ended", () => {
+    dungMuaBanhKem();
+    popup.remove();
   });
 });
-// 🧩 TẠM TẮT PHÍM TẮT KHI NHẬP TÊN SINH NHẬT
+
+  });
+});
+  
+// 🧩 TẮT PHÍM TẮT KHI NHẬP TÊN
 document.addEventListener("keydown", function (e) {
   const input = document.activeElement;
-
-  // Nếu đang nhập trong ô input (tên, tìm kiếm, v.v.)
   if (input && (input.tagName === "INPUT" || input.tagName === "TEXTAREA")) {
-    // Không cho code điều khiển nhạc, tìm kiếm, … bắt phím này
     e.stopImmediatePropagation();
-    return; // để bàn phím hoạt động bình thường như Word
+    return;
   }
-}, true); // <-- quan trọng: dùng chế độ capture để chạy TRƯỚC các hàm khác
+}, true);
+
 
 
